@@ -70,7 +70,6 @@ int main()
 	while (!fileIn2.eof())
 	{
 		string line;
-		string line2;
 		getline(fileIn2, line);
 		banWords += line + '\n';
 	}
@@ -79,17 +78,16 @@ int main()
 
 	for (int i = 0; i <= str.length(); i++)
 	{
-		int k = 0;
-
-		if (str[i] != banWords[k] || str[i] != banWords[k])
+		for (int j = 0; j <= banWords.length(); j++)
 		{
-			k = 0;
-			newStr += str[i];
-		}
-		else
-		{
-			k++;
-			newStr += ' ';
+			if (str[i] == banWords[j])
+			{
+				newStr += "*";
+			}
+			else
+			{
+				newStr += str[i];
+			}
 		}
 	}
 
