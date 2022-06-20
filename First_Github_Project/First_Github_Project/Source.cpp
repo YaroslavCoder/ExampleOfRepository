@@ -26,63 +26,80 @@ int main()
 	setlocale(LC_ALL, "Russian"); // подключить русский €зык
 
 	string filename1 = "C:\\for_Github_Projects\\ExampleOfRepository\\First_Github_Project\\First_Github_Project\\text.txt";
-	string filename2 = "C:\\for_Github_Projects\\ExampleOfRepository\\First_Github_Project\\First_Github_Project\\filtred.txt";
+	string filename2 = "C:\\for_Github_Projects\\ExampleOfRepository\\First_Github_Project\\First_Github_Project\\badWords.txt";
+	string filename3 = "C:\\for_Github_Projects\\ExampleOfRepository\\First_Github_Project\\First_Github_Project\\filtredText.txt";
 
-	ifstream fileIn; //создаЄм экземпл€р класса дл€ чтени€ из файла
+	ifstream fileIn1; //создаЄм экземпл€р класса дл€ чтени€ из файла
+	ifstream fileIn2;
 	ofstream fileOut;
 
-	fileIn.open(filename1);
-	fileOut.open(filename2);
+	fileIn1.open(filename1);
+	fileIn2.open(filename2);
+	fileOut.open(filename3);
 
-	if (fileIn.fail()) //был ли открыт файл или нет
+	if (fileIn1.fail()) //был ли открыт файл или нет
 	{
-		cout << "error opening file!" << endl;
+		cout << "error opening file! FileIn1" << endl;
+		return 1;
+	}
+	if (fileIn2.fail()) //был ли открыт файл или нет
+	{
+		cout << "error opening file! FileIn2" << endl;
 		return 1;
 	}
 	if (fileOut.fail()) //был ли открыт файл или нет
 	{
-		cout << "error opening file!" << endl;
+		cout << "error opening file! fileOut" << endl;
 		return 1;
 	}
 
 	string str = "";
 
-	string ban1 = "";
-	string ban2 = "";
+	string banWords = "";
 
 	string newStr = "";
-	string tempStr = "";
 
-	while (!fileIn.eof())
+	while (!fileIn1.eof())
 	{
 		string line;
-		getline(fileIn, line);
+		getline(fileIn1, line);
 		str += line + "\n";
 	}
 	cout << str << endl;
 
-	while (!fileOut.eof())
+	while (!fileIn2.eof())
 	{
 		string line;
-		getline(fileIn, line);
-		str += line + "\n";
+		string line2;
+		getline(fileIn2, line);
+		banWords += line + '\n';
 	}
+
+	cout << banWords << endl;
 
 	for (int i = 0; i <= str.length(); i++)
 	{
-		if (str[i] != ' ' && i != str.length())
+		int k = 0;
+
+		if (str[i] != banWords[k] || str[i] != banWords[k])
 		{
-			/*j++;
-			tempStr += str[i];*/
+			k = 0;
+			newStr += str[i];
+		}
+		else
+		{
+			k++;
+			newStr += ' ';
 		}
 	}
 
+	cout << newStr << endl;
 
 
 
 
-
-		fileIn.close();
+		fileIn1.close();
+		fileIn2.close();
 		fileOut.close();
 
 
