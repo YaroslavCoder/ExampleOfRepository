@@ -55,7 +55,8 @@ int main()
 
 	string str = "";
 
-	string banWords = "";
+	string banWord1 = "";
+	string banWord2 = "";
 
 	string newStr = "";
 
@@ -69,26 +70,44 @@ int main()
 
 	while (!fileIn2.eof())
 	{
-		string line;
-		getline(fileIn2, line);
-		banWords += line + '\n';
+		string line1;
+		string line2;
+		getline(fileIn2, line1);
+		banWord1 += line1 + '\n';
+		getline(fileIn2, line2);
+		banWord2 += line2 + '\n';
 	}
 
-	cout << banWords << endl;
+	cout << banWord1 << endl;
+	cout << banWord2 << endl;
 
 	for (int i = 0; i <= str.length(); i++)
 	{
-		for (int j = 0; j <= banWords.length(); j++)
+		int k = 0;
+
+		if (str[i] == banWord1[k])
 		{
-			if (str[i] == banWords[j])
+			k++;
+			if (k == banWord1.length())
 			{
-				newStr += "*";
+				for (int g = 0; g <= banWord1.length(); g++)
+				{
+					newStr += "*";
+				}
 			}
-			else
+			else if (k == banWord2.length())
 			{
-				newStr += str[i];
+				for (int h = 0; h <= banWord2.length(); h++)
+				{
+					newStr += "*";
+				}
 			}
 		}
+			else
+			{
+			k = 0;
+				newStr += str[i];
+			}
 	}
 
 	cout << newStr << endl;
